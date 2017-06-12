@@ -1,6 +1,6 @@
 <template>
   <div>
-  Intencive Checkin
+  Incentive Reward
   </div>
 </template>
 

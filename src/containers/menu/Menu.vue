@@ -29,7 +29,7 @@
                   @click="select"
                   class="cp-button -primary _font-sub cp-block _full-width"
                   type="submit">
-                  Intencive
+                  Incentive
                 </button>
               </div>
 
@@ -46,7 +46,7 @@ export default {
   name: 'Menu',
   methods: {
     select () {
-      this.$router.push('/intensive/checkin')
+      this.$router.push('/incentive/checkin')
     }
   }
 }
