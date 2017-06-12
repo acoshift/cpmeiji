@@ -1,0 +1,64 @@
+@import 'config.scss';
+
+input[type='email'].cp-input,
+input[type='number'].cp-input,
+input[type='password'].cp-input,
+input[type='search'].cp-input,
+input[type='tel'].cp-input,
+input[type='text'].cp-input,
+input[type='date'].cp-input,
+input[type='url'].cp-input,
+input:not([type]).cp-input,
+textarea.cp-input,
+select.cp-input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #d1d1d1;
+  border-radius: 3px;
+  box-shadow: none;
+  box-sizing: inherit;
+  padding: 8px 16px;
+  background-color: white;
+  &.-rise {
+    box-shadow: 8px 10px 20px 0 rgba(46,61,73,0.15);
+  }
+}
+input[type='email'].cp-input:focus,
+input[type='number'].cp-input:focus,
+input[type='password'].cp-input:focus,
+input[type='search'].cp-input:focus,
+input[type='tel'].cp-input:focus,
+input[type='text'].cp-input:focus,
+input[type='date'].cp-input:focus,
+input[type='url'].cp-input:focus,
+input:not([type]).cp-input:focus,
+textarea.cp-input:focus,
+select.cp-input:focus {
+  border-color: $color-sub;
+  outline: 0;
+}
+
+input[type='email'].cp-input.error,
+input[type='number'].cp-input.error,
+input[type='password'].cp-input.error,
+input[type='search'].cp-input.error,
+input[type='tel'].cp-input.error,
+input[type='text'].cp-input.error,
+input[type='date'].cp-input.error,
+input[type='url'].cp-input.error,
+input:not([type]).cp-input.error,
+textarea.cp-input.error,
+select.cp-input.error {
+  border-color: $color-negative;
+  outline: 0;
+}
+
+.input-field {
+  margin-bottom: 16px;
+  &:not(.inline) {
+    label {
+      margin-bottom: 6px;
+    }
+  }
+}
