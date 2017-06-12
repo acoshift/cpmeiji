@@ -12,25 +12,24 @@
             <div class="cp-card cp-segment _flex-column">
 
               <div class="cp-header _font-sub _color-sub _align-center">
-                Sign In
-              </div>
-
-              <div class="input-field _flex-column">
-                <label>Username:</label>
-                <input class="cp-input" name="Email" placeholder="Username">
-              </div>
-
-              <div class="input-field _flex-column">
-                <label>Password:</label>
-                <input class="cp-input" name="Email" placeholder="Password">
+                Select Menu
               </div>
 
               <div class="_flex-row _main-center">
                 <button
-                  @click="login"
+                  @click="select"
                   class="cp-button -primary _font-sub cp-block _full-width"
                   type="submit">
-                  Sign In
+                  Order
+                </button>
+              </div>
+
+               <div class="_flex-row _main-center">
+                <button
+                  @click="select"
+                  class="cp-button -primary _font-sub cp-block _full-width"
+                  type="submit">
+                  Intencive
                 </button>
               </div>
 
@@ -44,10 +43,10 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Menu',
   methods: {
-    login () {
-      this.$router.push('/menu')
+    select () {
+      this.$router.push('/intensive/checkin')
     }
   }
 }
