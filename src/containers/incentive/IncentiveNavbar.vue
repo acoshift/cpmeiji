@@ -23,12 +23,7 @@
 
 <script>
 export default {
-  name: 'IncentiveNavbar',
-  methods: {
-    selectMenu (menu) {
-      this.$router.push(`/incentive/${menu}`)
-    }
-  }
+  name: 'IncentiveNavbar'
 }
 </script>
 
