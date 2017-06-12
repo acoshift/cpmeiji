@@ -9,12 +9,12 @@ export default new Router({
   routes: [
     {
       path: '/login',
-      name: 'Hello',
+      name: 'Login',
       component: Login
     },
     {
       path: '/intensive',
-      name: 'Hello',
+      name: 'Intensive',
       component: Hello,
       children: [
         {
@@ -25,7 +25,7 @@ export default new Router({
     },
     {
       path: '/order',
-      name: 'Hello',
+      name: 'Order',
       component: Hello
     },
     { path: '*', redirect: '/login' }

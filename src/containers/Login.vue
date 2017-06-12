@@ -26,7 +26,10 @@
               </div>
 
               <div class="_flex-row _main-center">
-                <button class="cp-button -primary _font-sub cp-block _full-width" type="submit">
+                <button
+                  @click="login"
+                  class="cp-button -primary _font-sub cp-block _full-width"
+                  type="submit">
                   Sign In
                 </button>
               </div>
@@ -42,8 +45,9 @@
 <script>
 export default {
   name: 'Login',
-  data () {
-    return {
+  methods: {
+    login () {
+      this.$router.push('/intensive/checkin')
     }
   }
 }
