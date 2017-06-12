@@ -7,11 +7,10 @@
         <i class="fa fa-angle-left"></i>
       </div>
       <div class="_flex-row _cross-center">
-        <h4 class="_no-margin">{{ menu }}</h4>
+        <h4 class="_no-margin">{{ menuName }}</h4>
       </div>
     </div>
     <incentive-navbar></incentive-navbar>
-    Incentive
     <router-view></router-view>
   </div>
 </template>
@@ -24,13 +23,16 @@ export default {
     IncentiveNavbar
   },
   data () {
-    return {
-      menu: 'History'
-    }
+    return {}
   },
   methods: {
     back () {
       this.$router.push('/menu')
+    }
+  },
+  computed: {
+    menuName () {
+      return this.$route.path.split('/incentive/')[1] || ''
     }
   }
 }

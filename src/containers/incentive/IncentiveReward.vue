@@ -1,6 +1,8 @@
 <template>
-  <div>
-  Incentive Reward
+  <div class="reward">
+    <div class="cp-header">
+      Incentive Reward
+    </div>
   </div>
 </template>
 
@@ -8,4 +10,7 @@
 </script>
 
 <style scoped lang="scss">
+.reward {
+  padding-top: 16px;
+}
 </style>
