@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
-import Login from '@/containers/Login'
+import Login from '@/containers/login/Login'
+import Intencive from '@/containers/intencive/Intencive'
+import IntenciveCheckin from '@/containers/intencive/IntenciveCheckin'
 
 Vue.use(Router)
 
@@ -15,11 +17,11 @@ export default new Router({
     {
       path: '/intensive',
       name: 'Intensive',
-      component: Hello,
+      component: Intencive,
       children: [
         {
           path: 'checkin',
-          component: Hello
+          component: IntenciveCheckin
         }
       ]
     },
