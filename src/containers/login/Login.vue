@@ -15,12 +15,12 @@
                 Sign In
               </div>
 
-              <div class="input-field _flex-column">
+              <div class="cp-input-field _flex-column">
                 <label>Username:</label>
                 <input class="cp-input" name="Email" placeholder="Username">
               </div>
 
-              <div class="input-field _flex-column">
+              <div class="cp-input-field _flex-column">
                 <label>Password:</label>
                 <input class="cp-input" name="Email" placeholder="Password">
               </div>

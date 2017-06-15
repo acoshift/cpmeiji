@@ -10,7 +10,7 @@
     </div>
 
     <div class="location-info cp-segment">
-      <div class="input-field cp-block _flex-row _cross-center">
+      <div class="cp-input-field cp-block _flex-row _cross-center">
         <label class="_no-margin">ห้าง:</label>
         <select class="cp-input _flex-span" v-model="select1">
           <option value="" disabled>กรุณาเลือก...</option>
@@ -19,7 +19,7 @@
           <option value="sdsds">Lotus</option>
         </select>
       </div>
-      <div class="input-field cp-block _flex-row _cross-center">
+      <div class="cp-input-field cp-block _flex-row _cross-center">
         <label class="_no-margin">ร้าน:</label>
         <select class="cp-input _flex-span" v-model="select2">
           <option value="" disabled>กรุณาเลือก...</option>
@@ -28,7 +28,7 @@
           <option value="sdsds">10022 - The Mall Bang kapi</option>
         </select>
       </div>
-      <div class="input-field _flex-row _cross-center">
+      <div class="cp-input-field _flex-row _cross-center">
         <label class="_no-margin">Available Location:</label>
         <select class="cp-input _flex-span" v-model="select3">
           <option value="" disabled>กรุณาเลือก...</option>
@@ -57,7 +57,7 @@
       </div>
 
       <div class="_flex-column _flex-span">
-        <div class="input-field cp-block _flex-row _cross-center">
+        <div class="cp-input-field cp-block _flex-row _cross-center">
           <select class="cp-input _flex-span" v-model="select4">
             <option value="checkin">เช๊คอิน</option>
             <option value="report">ส่งรายงาน</option>

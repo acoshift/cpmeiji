@@ -16,22 +16,24 @@
               </div>
 
               <div class="_flex-row _main-center">
-                <button
-                  @click="select"
-                  class="cp-button -primary _font-sub cp-block _full-width"
-                  type="submit">
-                  Order
-                </button>
+                <router-link to="/order/location" class="_full-width">
+                  <div class="cp-button -primary _font-sub cp-block">
+                    Order
+                  </div>
+                </router-link>
               </div>
 
-               <div class="_flex-row _main-center">
-                <button
-                  @click="select"
-                  class="cp-button -primary _font-sub cp-block _full-width"
-                  type="submit">
-                  Incentive
-                </button>
+              <div class="_flex-row _main-center cp-block">
+                <router-link to="/incentive/checkin" class="_full-width">
+                  <div class="cp-button -primary _font-sub cp-block">
+                    Incentive
+                  </div>
+                </router-link>
               </div>
+
+              <a href="/login" class="_full-width _align-center _color-sub">
+                Logout
+              </a>
 
             </div>
           </div>
