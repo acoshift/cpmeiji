@@ -1,8 +1,12 @@
 <template>
   <div>
     <div class="product-panel cp-block">
-      <div class="cp-input-field _flex-column _no-margin cp-segment">
-        <label>ประเภทสินค้า</label>
+      <div class="cp-input-field _flex-column _no-margin" style="padding: 12px 16px">
+        <div>ร้าน: ตั้งหั๊วเสง</div>
+      </div>
+
+      <div class="cp-input-field _flex-column _no-margin cp-segment" style="padding-top: 0px">
+        <label>เลือกประเภทสินค้า</label>
         <select class="cp-input _flex-span" v-model="selectedCategory">
           <!--<option value="" disabled selected>กรุณาเลือก...</option>-->
           <option value="100101">ทั้งหมด</option>
@@ -81,7 +85,7 @@ export default {
 
 <style scoped lang="scss">
 .product-card-container {
-  padding-top: 128px;
+  padding-top: 155px;
 }
 .product-panel {
   position: fixed;
