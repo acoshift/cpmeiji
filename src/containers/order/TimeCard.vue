@@ -1,9 +1,11 @@
 <template>
   <div class="time-card cp-segment">
     <div class="cp-block">
-      <div class="cp-block"><strong>วันที่ส่ง: </strong> {{ date }}</div>
-      <div class="cp-block"><strong>เวลา: </strong> {{ time }}</div>
-      <div class="cp-block"><strong>ประเภท: </strong> {{ type || '-' }}</div>
+      <div class="cp-block"><strong>รอบ </strong> {{ name || '-' }}</div>
+      <div class="cp-block"><strong>วันที่สั่ง: </strong> {{ orderDate || '-' }}</div>
+      <div class="cp-block"><strong>วันที่ส่ง: </strong> {{ sentDate || '-' }}</div>
+      <div class="cp-block"><strong>สถานที่ส่ง: </strong> {{ location || '-' }}</div>
+      <div class="cp-block"><strong>ผู้ส่ง: </strong> {{ sender || '-' }}</div>
     </div>
     <div class="cp-button -positive" @click="select">เลือกรอบนี้</div>
   </div>
@@ -12,7 +14,13 @@
 <script>
 export default {
   name: 'TimeCard',
-  props: ['date', 'time', 'type'],
+  props: [
+    'name',
+    'orderDate',
+    'sentDate',
+    'location',
+    'sender'
+  ],
   data () {
     return {
     }

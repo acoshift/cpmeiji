@@ -2,7 +2,7 @@
   <div>
     <div class="product-panel cp-block">
       <div class="cp-input-field _flex-column _no-margin" style="padding: 12px 16px">
-        <div>ร้าน: ตั้งหั๊วเสง</div>
+        <div>ร้าน: ตั้งหั๊วเสง - 16 มกราคม 2560 13:20</div>
       </div>
 
       <div class="cp-input-field _flex-column _no-margin cp-segment" style="padding-top: 0px">
@@ -18,11 +18,11 @@
       <div class="_flex-row _main-end cp-block">
         <div class="_flex-row cp-side-space-bigger">
           <input id="tax" class="cp-input" type="checkbox">
-          <label for="tax" class="cp-label-inline">มี Tax</label>
+          <label for="tax" class="cp-label-inline">มี Vat</label>
         </div>
         <div class="_flex-row cp-side-space-bigger">
           <input id="notax" class="cp-input" type="checkbox">
-          <label for="notax" class="cp-label-inline">ไม่มี Tax</label>
+          <label for="notax" class="cp-label-inline">ไม่มี Vat</label>
         </div>
       </div>
 

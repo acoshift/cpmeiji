@@ -1,55 +1,25 @@
 <template>
   <div>
+
     <div class="location-panel cp-block">
       <div class="cp-input-field _flex-column _no-margin cp-segment">
-        <label>เลือกสถานที่</label>
+        <label>เลือกสถานที่ส่ง</label>
         <select class="cp-input _flex-span" v-model="selectedLocation">
           <option value="" disabled selected>กรุณาเลือก...</option>
-          <option value="100101">100101 - ตั้งหั๊วเสง</option>
-          <option value="100102">100102 - Foodland เดอะไบรท์ พระราม 4</option>
-          <option value="100103">100103 - Isetan พระราม 2</option>
-          <option value="100104">100104 - Central Ladprao</option>
-          <option value="100105">100105 - Central Westgate</option>
+          <option v-for="location in locationData" :value="location.name">{{ location.name }}</option>
         </select>
       </div>
     </div>
-
-    <div v-if="selectedLocation !== ''" class="time-card-container row">
-      <div class="col-xs-12 cp-block">
+    <div v-if="locationRound" class="time-card-container row">
+      <div v-for="(round, i) in locationRound" class="col-xs-12 cp-block">
         <TimeCard
-          id="1"
-          date="16 มิถุนายน 2560"
-          time="12:30"
-          type="เฉพาะนม"
-          @select="select('1')">
-        </TimeCard>
-      </div>
-
-      <div class="col-xs-12 cp-block">
-        <TimeCard
-          id="2"
-          date="16 มิถุนายน 2560"
-          time="12:30"
-          @select="select('2')">
-        </TimeCard>
-      </div>
-
-      <div class="col-xs-12 cp-block">
-        <TimeCard
-          id="3"
-          date="16 มิถุนายน 2560"
-          time="17:30"
-          @select="select('3')">
-        </TimeCard>
-      </div>
-
-      <div class="col-xs-12 cp-block">
-        <TimeCard
-          id="4"
-          date="17 มิถุนายน 2560"
-          time="17:30"
-          type="นมและโยเกิร์ต"
-          @select="select('4')">
+          :id="round.id"
+          :name="round.name"
+          :orderDate="round.orderDate"
+          :sentDate="round.sentDate"
+          :location="round.location"
+          :sender="round.sender"
+          @select="select(i)">
         </TimeCard>
       </div>
 
@@ -66,6 +36,7 @@ export default {
   },
   data () {
     return {
+      locationData: require('./locationData.json'),
       selectedLocation: ''
     }
   },
@@ -74,6 +45,15 @@ export default {
       console.log('select this', id)
       this.$emit('selectLocation', id)
       this.$router.push('/order/product')
+    }
+  },
+  computed: {
+    locationRound () {
+      console.log(this.selectedLocation)
+      if (this.selectedLocation === '') return null
+      return this.locationData.filter((location) => {
+        return location.name === this.selectedLocation
+      })[0].round
     }
   }
 }

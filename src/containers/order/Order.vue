@@ -10,7 +10,7 @@
         <h4 class="_no-margin">{{ pageName }}</h4>
       </div>
       <div
-        v-if="pageName === 'Select Product'"
+        v-if="pageName === 'กรุณาเลือกสินค้า'"
         @click="checkout"
         class="back _flex-row _cross-center _main-center _font-size-bigger">
         <i class="fa fa-shopping-basket"></i>
@@ -40,8 +40,8 @@ export default {
   computed: {
     pageName () {
       let path = this.$route.path.split('/order/')[1]
-      if (path === 'location') return 'Select Location'
-      else if (path === 'product') return 'Select Product'
+      if (path === 'location') return 'กรุณาเลือกรอบการสั่ง'
+      else if (path === 'product') return 'กรุณาเลือกสินค้า'
       else if (path === 'summary') return 'Order Summary'
     }
   }
