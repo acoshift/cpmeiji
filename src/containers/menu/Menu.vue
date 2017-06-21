@@ -31,7 +31,7 @@
                 </router-link>
               </div>
 
-              <a href="/login" class="_full-width _align-center _color-sub">
+              <a href="#/login" class="_full-width _align-center _color-sub">
                 Logout
               </a>
 

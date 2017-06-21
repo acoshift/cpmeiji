@@ -2,28 +2,33 @@
   <div>
 
     <div class="location-panel cp-block">
-      <div class="cp-input-field _flex-column _no-margin cp-segment">
-        <label>เลือกสถานที่ส่ง</label>
-        <select class="cp-input _flex-span" v-model="selectedLocation">
-          <option value="" disabled selected>กรุณาเลือก...</option>
-          <option v-for="location in locationData" :value="location.name">{{ location.name }}</option>
+      <div v-if="role === 'sale'" class="cp-input-field _flex-column _no-margin cp-segment">
+        <label>เลือกร้าน</label>
+        <select class="cp-input _flex-span" v-model="selectedLocation" multiple>
+          <option value="" disabled>กรุณาเลือก...</option>
+          <option v-for="location in locations" :value="location">{{ location }}</option>
         </select>
       </div>
+
+      <div v-else class="cp-input-field _flex-column _no-margin cp-segment">
+        <label>ร้านของคุณ</label>
+        <div>100101 - ตั้งหั๊วเสง</div>
+      </div>
     </div>
-    <div v-if="locationRound" class="time-card-container row">
-      <div v-for="(round, i) in locationRound" class="col-xs-12 cp-block">
+    {{ locationHeight }}
+    <div
+      class="time-card-container row"
+      :style="{ 'padding-top': locationHeight + 'px' }">
+      <div v-for="(round, i) in rounds" class="col-xs-12 cp-block">
         <TimeCard
-          :id="round.id"
-          :name="round.name"
           :orderDate="round.orderDate"
+          :orderTime="round.orderTime"
           :sentDate="round.sentDate"
-          :location="round.location"
-          :sender="round.sender"
           @select="select(i)">
         </TimeCard>
       </div>
-
     </div>
+
   </div>
 </template>
 
@@ -36,9 +41,19 @@ export default {
   },
   data () {
     return {
-      locationData: require('./locationData.json'),
-      selectedLocation: ''
+      role: '',
+      locationHeight: 0,
+      locations: require('./location.json'),
+      rounds: require('./round.json'),
+      selectedLocation: [],
+      selectedRound: ''
     }
+  },
+  created () {
+    this.role = window.role || ''
+  },
+  mounted () {
+    this.locationHeight = document.querySelector('.location-panel').clientHeight
   },
   methods: {
     select (id) {
@@ -49,8 +64,7 @@ export default {
   },
   computed: {
     locationRound () {
-      console.log(this.selectedLocation)
-      if (this.selectedLocation === '') return null
+      if (this.selectedLocation.length === 0) return null
       return this.locationData.filter((location) => {
         return location.name === this.selectedLocation
       })[0].round
@@ -61,7 +75,7 @@ export default {
 
 <style scoped lang="scss">
 .time-card-container {
-  padding-top: 108px;
+  padding-top: 90px;
 }
 .location-panel {
   position: fixed;

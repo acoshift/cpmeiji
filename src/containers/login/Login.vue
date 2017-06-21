@@ -14,25 +14,26 @@
               <div class="cp-header _font-sub _color-sub _align-center">
                 Sign In
               </div>
+              <form @submit="login">
+                <div class="cp-input-field _flex-column">
+                  <label>Username:</label>
+                  <input v-model="username" class="cp-input" name="Email" placeholder="Username">
+                </div>
 
-              <div class="cp-input-field _flex-column">
-                <label>Username:</label>
-                <input class="cp-input" name="Email" placeholder="Username">
-              </div>
+                <div class="cp-input-field _flex-column">
+                  <label>Password:</label>
+                  <input v-model="password" class="cp-input" name="Password" placeholder="Password">
+                </div>
 
-              <div class="cp-input-field _flex-column">
-                <label>Password:</label>
-                <input class="cp-input" name="Email" placeholder="Password">
-              </div>
-
-              <div class="_flex-row _main-center">
-                <button
-                  @click="login"
-                  class="cp-button -primary _font-sub cp-block _full-width"
-                  type="submit">
-                  Sign In
-                </button>
-              </div>
+                <div class="_flex-row _main-center">
+                  <button
+                    @click="login"
+                    class="cp-button -primary _font-sub cp-block _full-width"
+                    type="submit">
+                    Sign In
+                  </button>
+                </div>
+              </form>
 
             </div>
           </div>
@@ -45,8 +46,15 @@
 <script>
 export default {
   name: 'Login',
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
   methods: {
     login () {
+      window.role = this.username === 'sale' ? 'sale' : ''
       this.$router.push('/menu')
     }
   }
