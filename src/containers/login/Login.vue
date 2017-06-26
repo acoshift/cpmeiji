@@ -14,7 +14,7 @@
               <div class="cp-header _font-sub _color-sub _align-center">
                 Sign In
               </div>
-              <form @submit="login">
+              <form @submit.prevent="login">
                 <div class="cp-input-field _flex-column">
                   <label>Username:</label>
                   <input v-model="username" class="cp-input" name="Email" placeholder="Username">
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { API } from '@/services'
+
 export default {
   name: 'Login',
   data () {
@@ -54,8 +56,12 @@ export default {
   },
   methods: {
     login () {
-      window.role = this.username === 'sale' ? 'sale' : ''
-      this.$router.push('/menu')
+      API.login(this.username, this.password)
+        .then((res) => {
+          console.log(res)
+        })
+      // window.role = this.username === 'sale' ? 'sale' : ''
+      // this.$router.push('/menu')
     }
   }
 }
