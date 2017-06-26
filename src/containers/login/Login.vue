@@ -27,7 +27,6 @@
 
                 <div class="_flex-row _main-center">
                   <button
-                    @click="login"
                     class="cp-button -primary _font-sub cp-block _full-width"
                     type="submit">
                     Sign In
@@ -57,9 +56,11 @@ export default {
   methods: {
     login () {
       API.login(this.username, this.password)
-        .then((res) => {
-          console.log(res)
-        })
+        .subscribe(
+          (res) => {
+            console.log(res)
+          }
+        )
       // window.role = this.username === 'sale' ? 'sale' : ''
       // this.$router.push('/menu')
     }
