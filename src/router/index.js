@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Login from '@/containers/login/Login'
 import Menu from '@/containers/menu/Menu'
 
+import Profile from '@/containers/profile/Profile'
+
 import Incentive from '@/containers/incentive/Incentive'
 import IncentiveCheckin from '@/containers/incentive/IncentiveCheckin'
 import IncentiveHistory from '@/containers/incentive/IncentiveHistory'
@@ -22,6 +24,16 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/menu',
+      name: 'Menu',
+      component: Menu
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/menu',

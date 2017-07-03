@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="incentive">
     <div class="incentive-status-bar _flex-row _bg-color-accent">
       <div
         @click="back"
@@ -39,6 +39,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.incentive {
+  background: white;
+}
 .incentive-status-bar {
   height: 40px;
   color: white;

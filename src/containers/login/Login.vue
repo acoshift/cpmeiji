@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { API } from '@/services'
+// import { API } from '@/services'
 
 export default {
   name: 'Login',
@@ -55,14 +55,14 @@ export default {
   },
   methods: {
     login () {
-      API.login(this.username, this.password)
-        .subscribe(
-          (res) => {
-            console.log(res)
-          }
-        )
-      // window.role = this.username === 'sale' ? 'sale' : ''
-      // this.$router.push('/menu')
+      // API.login(this.username, this.password)
+      //   .subscribe(
+      //     (res) => {
+      //       console.log(res)
+      //     }
+      //   )
+      window.role = this.username === 'sale' ? 'sale' : ''
+      this.$router.push('/menu')
     }
   }
 }
