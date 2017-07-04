@@ -2,10 +2,10 @@
   <div class="login">
     <div class="user-panel cp-segment cp-block-big _flex-column _cross-center _bg-color-accent">
 
-      <img
+      <!--<img
         src="~@/assets/avatar.png" alt="avatar"
         class="cp-circle -big cp-block _bg-color-light _img-cover"
-        width="100%" height="100%">
+        width="100%" height="100%">-->
 
       <div class="cp-block _font-sub _font-size-bigger _font-thin">
         สวัสดี, <strong>คุณ{{ name }}</strong>

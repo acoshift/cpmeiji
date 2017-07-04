@@ -21,10 +21,10 @@
           <div class="col-xs-12 col-md-6 col-md-offset-3">
             <div class="_flex-column">
               <div class="_flex-row _main-center">
-                <img
+                <!--<img
                 src="~@/assets/avatar.png" alt="avatar"
                 class="cp-circle -big cp-block _bg-color-light _img-cover"
-                width="100%" height="100%">
+                width="100%" height="100%">-->
               </div>
               <div class="cp-input-field _flex-column">
                 <label>ชื่อร้าน:</label>
