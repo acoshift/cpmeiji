@@ -1,64 +1,33 @@
 <template>
   <div>
-    <div class="product-panel cp-block">
-      <div class="cp-input-field _flex-column _no-margin" style="padding: 12px 16px">
-        <div>ร้าน: ตั้งหั๊วเสง - 16 มกราคม 2560 13:20</div>
-      </div>
-
-      <div class="cp-input-field _flex-column _no-margin cp-segment" style="padding-top: 0px">
-        <label>เลือกประเภทสินค้า</label>
-        <select class="cp-input _flex-span" v-model="selectedCategory">
-          <!--<option value="" disabled selected>กรุณาเลือก...</option>-->
-          <option value="100101">ทั้งหมด</option>
-          <option value="100101">นมสด</option>
-          <option value="100103">โยเกิร์ตพร้อมดื่ม</option>
-        </select>
-      </div>
-
-      <div class="_flex-row _main-end cp-block">
+    <div class="product-panel cp-block cp-segment">
+      <div class="_flex-row _main-end">
+        <!--<div class="_flex-row cp-side-space-bigger">
+          <input id="tax" v-model="selectedType" value="all" name="type" class="cp-input" type="radio">
+          <label for="tax" class="cp-label-inline">ทั้งหมด</label>
+        </div>-->
         <div class="_flex-row cp-side-space-bigger">
-          <input id="tax" class="cp-input" type="checkbox">
+          <input id="tax"  v-model="selectedType" value="tax" name="type" class="cp-input" type="radio">
           <label for="tax" class="cp-label-inline">มี Vat</label>
         </div>
         <div class="_flex-row cp-side-space-bigger">
-          <input id="notax" class="cp-input" type="checkbox">
+          <input id="notax"  v-model="selectedType" value="untax" name="type" class="cp-input" type="radio">
           <label for="notax" class="cp-label-inline">ไม่มี Vat</label>
         </div>
       </div>
-
     </div>
-
-    <div v-if="selectedCategory !== ''" class="product-card-container row">
-      <div class="col-xs-12 cp-block">
+    <div class="product-card-container row">
+      <!--<div class="col-xs-12 cp-block">
+        <div class="cp-button -primary">กลับไปเลือกหมวดหมู่</div>
+      </div>-->
+      <div v-for="(product, i) in productList" :key="i" class="col-xs-12 cp-block">
         <ProductCard
-          id="1"
-          code="112100"
-          name="นมสด 200 cc"
-          variant="รสจืด, รสโกโก้"
-          @select="select('1')">
+          :code="product.code"
+          :name="product.title"
+          :vat="product.vat"
+          :quantity="0">
         </ProductCard>
       </div>
-
-      <div class="col-xs-12 cp-block">
-        <ProductCard
-          id="2"
-          code="112101"
-          name="นมสด 350 cc"
-          variant="รสจืด, รสโกโก้, รสหวาน"
-          @select="select('1')">
-        </ProductCard>
-      </div>
-
-      <div class="col-xs-12 cp-block">
-        <ProductCard
-          id="2"
-          code="112104"
-          name="โยเกิร์ตพร้อมดื่ม บัลแกเลีย"
-          variant="-"
-          @select="select('1')">
-        </ProductCard>
-      </div>
-
     </div>
   </div>
 </template>
@@ -70,14 +39,34 @@ export default {
   components: {
     ProductCard
   },
+  props: {
+    accountData: {
+      type: Object,
+      required: true
+    },
+    sessionData: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
-      selectedCategory: '100101'
+      selectedType: 'all'
+    }
+  },
+  computed: {
+    productList () {
+      let categoryId = this.$route.params.categoryId
+      let productList = this.accountData.blocks.filter(x => x.id === categoryId)
+      return productList.length ? productList[0].products : []
     }
   },
   methods: {
-    select (id, variant, quantity) {
-      console.log('select this', id)
+    addOne (product) {
+      console.log('ADD one', product)
+    },
+    addTen (product) {
+      console.log('ADD ten', product)
     }
   }
 }
@@ -85,12 +74,13 @@ export default {
 
 <style scoped lang="scss">
 .product-card-container {
-  padding-top: 155px;
+  padding-top: 60px;
 }
 .product-panel {
+  box-sizing: border-box;
   position: fixed;
   z-index: 99;
-  width: 100%;
+  width: 100vw;
   background-color: white;
   border-bottom: 1px solid #ececec;
   box-shadow: 0 3px 7px rgba(50,50,93,.03), 0 2px 7px rgba(0,0,0,.03);

@@ -12,7 +12,8 @@ import IncentiveHistory from '@/containers/incentive/IncentiveHistory'
 import IncentiveReward from '@/containers/incentive/IncentiveReward'
 
 import Order from '@/containers/order/Order'
-import OrderSelectLocation from '@/containers/order/OrderSelectLocation'
+import OrderSelectRound from '@/containers/order/OrderSelectRound'
+import OrderSelectCategory from '@/containers/order/OrderSelectCategory'
 import OrderSelectProduct from '@/containers/order/OrderSelectProduct'
 import OrderSummary from '@/containers/order/OrderSummary'
 
@@ -69,11 +70,15 @@ export default new Router({
       component: Order,
       children: [
         {
-          path: 'location',
-          component: OrderSelectLocation
+          path: 'round',
+          component: OrderSelectRound
         },
         {
-          path: 'product',
+          path: 'category',
+          component: OrderSelectCategory
+        },
+        {
+          path: 'category/:categoryId',
           component: OrderSelectProduct
         },
         {

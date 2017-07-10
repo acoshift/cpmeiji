@@ -7,7 +7,7 @@
         class="cp-circle -big cp-block _bg-color-light _img-cover"
         width="100%" height="100%">-->
 
-      <div class="cp-block _font-sub _font-size-bigger _font-thin">
+      <div class="cp-block-big _font-sub _font-size-bigger _font-thin">
         สวัสดี, <strong>คุณ{{ name }}</strong>
       </div>
 
@@ -41,7 +41,7 @@
               </div>-->
 
               <div class="_flex-row _main-center">
-                <router-link to="/order/location" class="_full-width">
+                <router-link to="/order/round" class="_full-width">
                   <div class="cp-button -primary _font-bold cp-block">
                     ออร์เดอร์สินค้า
                   </div>
