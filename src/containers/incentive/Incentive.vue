@@ -9,12 +9,14 @@
       <div class="_flex-row _cross-center _flex-span">
         <h4 class="_no-margin">{{ menuName }}</h4>
       </div>
-      <div
+      <!--<div
         class="checkout _flex-row _cross-center _main-center _font-size-bigger">
         <i class="fa fa-address-card-o"></i>
-      </div>
+      </div>-->
       <div
-        class="checkout _flex-row _cross-center _main-center _font-size-bigger">
+        @click="gotoSentReport"
+        class="checkout _flex-row _cross-center _main-center _font-size-bigger"
+        :class="{active: menuName === 'รายงานการส่ง'}">
         <i class="fa fa-file-text-o"></i>
       </div>
     </div>
@@ -36,6 +38,9 @@ export default {
   methods: {
     back () {
       this.$router.push('/menu')
+    },
+    gotoSentReport () {
+      this.$router.push('/incentive/sent-report')
     }
   },
   computed: {
@@ -46,6 +51,8 @@ export default {
         return 'ประวิติกิจกรรม'
       } else if (this.$route.path.split('/incentive/')[1] === 'reward') {
         return 'รางวัล'
+      } else if (this.$route.path.split('/incentive/')[1] === 'sent-report') {
+        return 'รายงานการส่ง'
       }
     }
   }
@@ -68,6 +75,9 @@ export default {
     min-width: 0px;
     margin-top: -2px;
     cursor: pointer;
+    &.active {
+      background-color: #c92e55;
+    }
   }
 }
 .view {
