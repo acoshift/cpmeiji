@@ -2,7 +2,7 @@
   <div class="checkin">
 
     <div class="user-info cp-segment _flex-row _main-space-between">
-      <div>นายบุญช่วย วิเศษนคร</div>
+      <div><strong>นายประเสริฐ บุญส่ง</strong></div>
       <div class="_align-right">
         <div><strong>PC-1234</strong></div>
         <div><small>17/03/2557</small></div>
@@ -51,25 +51,34 @@
 
     <div class="action-info cp-segment _flex-row _main-space-between">
 
-      <div class="_flex-row _flex-span" style="align-self: flex-start">
-        <label class="cp-button -info _font-sub" for="image-input">Upload Image</label>
+      <div class="_flex-row" style="align-self: flex-start; margin-right: 8px;">
+        <label class="cp-button -info _font-sub" for="image-input">อัพโหลดภาพ</label>
         <input id="image-input" class="_hide" name="Image" type="file" accept="image/*">
       </div>
 
-      <div class="_flex-column _flex-span">
+      <div class="_flex-column" style="flex: 1">
         <div class="cp-input-field cp-block _flex-row _cross-center">
-          <select class="cp-input _flex-span" v-model="select4">
+          <select class="cp-input" v-model="select4" style="box-sizing: border-box; width: 100%;">
             <option value="checkin">เช๊คอิน</option>
             <option value="report">ส่งรายงาน</option>
           </select>
         </div>
-        <textarea class="cp-input" name="" id="" rows="5"></textarea>
+        <textarea style="box-sizing: border-box; width: 100%;" class="cp-input" name="" id="" rows="5" placeholder="รายละเอียด">
+
+        </textarea>
+      </div>
+
+    </div>
+    <div class="row cp-block-big">
+      <div class="col-xs-12">
+        <div class="cp-button -positive" @click="checkin">ส่งข้อมูล</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SweetAlert from 'sweetalert'
 export default {
   name: 'IncentiveCheckin',
   data () {
@@ -80,15 +89,15 @@ export default {
       select4: 'checkin'
     }
   },
-  methods: {}
+  methods: {
+    checkin () {
+      SweetAlert('สำเร็จ!', 'คุณเช็คอินเรียบร้อยแล้ว', 'success')
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.checkin {
-
-}
-
 .user-info {
   border-bottom: 1px solid #ececec;
 }

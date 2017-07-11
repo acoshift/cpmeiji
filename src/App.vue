@@ -12,7 +12,6 @@ export default {
 
 <style lang="scss">
 body {
-  min-height: 100vh;
   background-color: #f7f6f6;
 }
 </style>

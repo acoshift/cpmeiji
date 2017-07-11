@@ -30,7 +30,13 @@ export default {
 <style scoped lang="scss">
 @import '~@/styles/config.scss';
 .navbar {
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+  z-index: 5;
+  margin-top: 45px;
   height: 50px;
+  box-shadow: 0 3px 7px rgba(50,50,93,.06), 0 2px 7px rgba(0,0,0,.06);
   >.menu {
     flex: 1;
     background-color: $color-accent;
