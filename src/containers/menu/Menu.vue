@@ -40,13 +40,13 @@
                 เมนู
               </div>-->
 
-              <div class="_flex-row _main-center">
+              <!--<div class="_flex-row _main-center">
                 <router-link to="/order/round" class="_full-width">
                   <div class="cp-button -primary _font-bold cp-block">
                     ออร์เดอร์สินค้า
                   </div>
                 </router-link>
-              </div>
+              </div>-->
 
               <div class="_flex-row _main-center cp-block">
                 <router-link to="/incentive/checkin" class="_full-width">
