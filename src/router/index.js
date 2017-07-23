@@ -6,12 +6,6 @@ import Menu from '@/containers/menu/Menu'
 
 import Profile from '@/containers/profile/Profile'
 
-import Incentive from '@/containers/incentive/Incentive'
-import IncentiveCheckin from '@/containers/incentive/IncentiveCheckin'
-import IncentiveHistory from '@/containers/incentive/IncentiveHistory'
-import IncentiveReward from '@/containers/incentive/IncentiveReward'
-import IncentiveSentReport from '@/containers/incentive/IncentiveSentReport'
-
 import Order from '@/containers/order/Order'
 import OrderSelectRound from '@/containers/order/OrderSelectRound'
 import OrderSelectCategory from '@/containers/order/OrderSelectCategory'
@@ -36,33 +30,6 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
-    },
-    {
-      path: '/incentive',
-      name: 'Incentive',
-      component: Incentive,
-      children: [
-        {
-          path: 'checkin',
-          component: IncentiveCheckin
-        },
-        {
-          path: 'history',
-          component: IncentiveHistory
-        },
-        {
-          path: 'reward',
-          component: IncentiveReward
-        },
-        {
-          path: 'sent-report',
-          component: IncentiveSentReport
-        },
-        {
-          path: '*',
-          redirect: 'checkin'
-        }
-      ]
     },
     {
       path: '/order',
