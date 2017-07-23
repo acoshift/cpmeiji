@@ -5,6 +5,8 @@ import Login from '@/containers/login/Login'
 import Menu from '@/containers/menu/Menu'
 
 import Profile from '@/containers/profile/Profile'
+import Log from '@/containers/log/Log'
+import History from '@/containers/history/History'
 
 import Order from '@/containers/order/Order'
 import OrderSelectRound from '@/containers/order/OrderSelectRound'
@@ -15,6 +17,7 @@ import OrderSummary from '@/containers/order/OrderSummary'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/login',
@@ -30,6 +33,16 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/log',
+      name: 'Log',
+      component: Log
+    },
+    {
+      path: '/history',
+      name: 'History',
+      component: History
     },
     {
       path: '/order',

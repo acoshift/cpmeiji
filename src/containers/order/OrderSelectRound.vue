@@ -63,7 +63,6 @@ export default {
         cancelButtonText: 'ยกเลิก',
         confirmButtonText: 'ยืนยัน'
       }, (inputValue) => {
-        console.log('A HA ', inputValue)
         if (inputValue && inputValue !== '') {
           this.$emit('selectRound', {
             store: this.selectedStore,

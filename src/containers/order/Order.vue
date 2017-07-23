@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="order-status-bar _flex-row _bg-color-accent">
+    <div class="status-bar _flex-row _bg-color-accent">
       <div
         @click="back"
         class="back _flex-row _cross-center _main-center _font-size-bigger">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <router-view
-      class="order-container"
+      class="content-container"
       :account-data="accountData"
       :session-data="sessionData"
       @selectRound="selectRound">
@@ -62,24 +62,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-$status-bar-height: 45px;
-.order-container {
-  padding-top: $status-bar-height;
-}
-.order-status-bar {
-  z-index: 100;
-  position: fixed;
-  width: 100%;
-  height: 45px;
-  color: white;
-  .back,
-  .checkout {
-    flex-basis: $status-bar-height;
-    min-width: 0px;
-    margin-top: -2px;
-    cursor: pointer;
-  }
-}
-</style>

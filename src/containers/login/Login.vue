@@ -55,13 +55,6 @@ export default {
   },
   methods: {
     login () {
-      // API.login(this.username, this.password)
-      //   .subscribe(
-      //     (res) => {
-      //       console.log(res)
-      //     }
-      //   )
-      window.role = this.username === 'sale' ? 'sale' : ''
       this.$router.push('/menu')
     }
   }

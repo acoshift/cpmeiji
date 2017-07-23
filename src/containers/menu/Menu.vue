@@ -13,18 +13,18 @@
 
       <div class="row _full-width">
         <div class="col-xs-6">
-          <a href="#/profile">
+          <router-link to="/profile">
             <div class="cp-button -positive">
               แก้ไขข้อมูล
             </div>
-          </a>
+          </router-link>
         </div>
         <div class="col-xs-6">
-          <a href="#/login">
+          <router-link to="/login">
             <div class="cp-button -positive">
               ออกจากระบบ
             </div>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -36,25 +36,29 @@
           <div class="col-xs-12 col-md-6 col-md-offset-3">
             <div class="_flex-column">
 
-              <!--<div class="cp-header _font-sub _color-sub _align-center">
-                เมนู
-              </div>-->
-
               <div class="_flex-row _main-center">
                 <router-link to="/order/round" class="_full-width">
                   <div class="cp-button -primary _font-bold cp-block">
-                    ออร์เดอร์สินค้า
+                    ออเดอร์สินค้า
                   </div>
                 </router-link>
               </div>
 
-              <!-- <div class="_flex-row _main-center cp-block">
-                <router-link to="/incentive/checkin" class="_full-width">
+              <div class="_flex-row _main-center">
+                <router-link to="/log" class="_full-width">
                   <div class="cp-button -primary cp-block">
-                    Incentive
+                    ประวัติออเดอร์
                   </div>
                 </router-link>
-              </div> -->
+              </div>
+
+              <div class="_flex-row _main-center">
+                <router-link to="/log" class="_full-width">
+                  <div class="cp-button -primary cp-block">
+                    ประวัติการใช้งาน
+                  </div>
+                </router-link>
+              </div>
 
             </div>
           </div>
@@ -70,11 +74,6 @@ export default {
   data () {
     return {
       name: 'ประเสริฐ'
-    }
-  },
-  methods: {
-    select () {
-      this.$router.push('/incentive/checkin')
     }
   }
 }
