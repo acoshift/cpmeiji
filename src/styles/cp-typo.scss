@@ -8,8 +8,10 @@
   word-break: break-all;
 }
 .cp-link {
+  color: #2f8dfa;
   cursor: pointer;
   &:hover {
+    color: #1975e0;
     text-decoration: underline;
   }
 }

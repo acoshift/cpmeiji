@@ -45,7 +45,7 @@
               </div>
 
               <div class="_flex-row _main-center">
-                <router-link to="/log" class="_full-width">
+                <router-link to="/history" class="_full-width">
                   <div class="cp-button -primary cp-block">
                     ประวัติออเดอร์
                   </div>

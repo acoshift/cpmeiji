@@ -11,9 +11,43 @@
       </div>
     </div>
 
-    <div class="content-container">
-      <div class="cp-container">
-        ASA
+    <div class="content-container cp-block-big">
+      <div class="cp-block-big"></div>
+      <div class="grid-container">
+        <table class="small-table-font">
+          <thead>
+            <th>การกระทำ</th>
+            <th>ผู้ใช้</th>
+            <th>เวลา</th>
+            <th>รายละเอียด</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-column="การกระทำ">Login</td>
+              <td data-column="ผู้ใช้">สมพร</td>
+              <td data-column="เวลา">09:30</td>
+              <td data-column="รายละเอียด" style="min-width: 120px">PO:12311221</td>
+            </tr>
+            <tr>
+              <td data-column="การกระทำ">Order</td>
+              <td data-column="ผู้ใช้">สมหมาย</td>
+              <td data-column="เวลา">09.32</td>
+              <td data-column="รายละเอียด" style="min-width: 120px">PO:12113343</td>
+            </tr>
+            <tr>
+              <td data-column="การกระทำ">Order</td>
+              <td data-column="ผู้ใช้">ประเสริฐ</td>
+              <td data-column="เวลา">10:16</td>
+              <td data-column="รายละเอียด" style="min-width: 120px">PO:21131223</td>
+            </tr>
+            <tr>
+              <td data-column="การกระทำ">Login</td>
+              <td data-column="ผู้ใช้">สมพงศ์</td>
+              <td data-column="เวลา">11.30</td>
+              <td data-column="รายละเอียด" style="min-width: 120px">PO:81123112</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 

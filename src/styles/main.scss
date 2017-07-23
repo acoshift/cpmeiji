@@ -34,9 +34,23 @@
   }
 }
 
+table {
+  thead {
+    @media only screen and (max-width: 969px) {
+      display: none;
+    }
+  }
+  &.small-table-font {
+    th, td {
+      font-size: 0.9rem;
+    }
+  }
+}
+
 .content-container {
   padding-top: 45px;
 }
+
 
 body, html {
   color: $color-dark;
