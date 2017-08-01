@@ -54,6 +54,11 @@ export default {
       selectedType: 'all'
     }
   },
+  subscriptions () {
+    return {
+      products: this.$api.listProducts().do(console.log)
+    }
+  },
   computed: {
     productList () {
       let categoryId = this.$route.params.categoryId

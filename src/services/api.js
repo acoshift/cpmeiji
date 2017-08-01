@@ -6,12 +6,12 @@ const http = axios.create({
   baseURL: process.env.API_URL
 })
 
-let token = ''
-
+let token = window.localStorage.getItem('token') || ''
+console.log(token)
 const response = (res) => res.data.Data
 
 export const get = (path, config) => Observable
-  .fromPromise(http.get(path, { ...config, params: { Token: token } }))
+  .fromPromise(http.get(path, { ...config, headers: { Authorization: 'Bearer ' + token } }))
   .map(response)
 
 export const rawPost = (path, data, config) => Observable
@@ -32,7 +32,7 @@ export const post = (path, data, config) =>
 
 export const login = (username, password) =>
   rawPost(
-    'Login',
+    'login',
     qs.stringify({
       username, password
     }), {
@@ -41,7 +41,23 @@ export const login = (username, password) =>
       }
     }
   )
-  .do((res) => {
-    console.log(res)
-    token = res.Token.Token
+  .switchMap((res) => {
+    if (!res.Success) {
+      return Observable.throw(res.Message)
+    }
+    return Observable.of(res)
   })
+  .do((res) => {
+    token = res.Token.Token
+    window.localStorage.setItem('token', token)
+  })
+
+export const isLogin = () => Observable.of(!!token)
+
+export const logout = () => {
+  token = ''
+  window.localStorage.removeItem('token')
+  return Observable.of({})
+}
+
+export const listProducts = () => get('Product/GetProducts')

@@ -6,7 +6,7 @@
         class="back _flex-row _cross-center _main-center _font-size-bigger">
         <i class="fa fa-angle-left _font-bold"></i>
       </div>
-      <div class="_flex-row _cross-center _flex-span">
+      <div class="_flex-row _cross-center _flex-span" @click="back">
         <h4 class="_no-margin">ประวัติการใช้งาน</h4>
       </div>
     </div>

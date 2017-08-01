@@ -20,11 +20,9 @@
           </router-link>
         </div>
         <div class="col-xs-6">
-          <router-link to="/login">
-            <div class="cp-button -positive">
-              ออกจากระบบ
-            </div>
-          </router-link>
+          <div class="cp-button -positive" @click="logout">
+            ออกจากระบบ
+          </div>
         </div>
       </div>
     </div>
@@ -74,6 +72,14 @@ export default {
   data () {
     return {
       name: 'ประเสริฐ'
+    }
+  },
+  methods: {
+    logout () {
+      this.$api.logout()
+        .subscribe(() => {
+          this.$router.push('/login')
+        })
     }
   }
 }

@@ -14,40 +14,68 @@ import OrderSelectCategory from '@/containers/order/OrderSelectCategory'
 import OrderSelectProduct from '@/containers/order/OrderSelectProduct'
 import OrderSummary from '@/containers/order/OrderSummary'
 
+import { API } from '@/services'
+
 Vue.use(Router)
 
-export default new Router({
+const mustLogin = (to, from, next) => {
+  API.isLogin().first().subscribe((b) => {
+    if (b) {
+      next()
+      return
+    }
+    next('/login')
+  })
+}
+
+const mustNotLogin = (to, form, next) => {
+  API.isLogin().first().subscribe((b) => {
+    if (!b) {
+      next()
+      return
+    }
+    next('/login')
+  })
+}
+
+const router = new Router({
   mode: 'history',
   routes: [
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      beforeEnter: mustNotLogin
     },
     {
       path: '/menu',
       name: 'Menu',
-      component: Menu
+      component: Menu,
+      beforeEnter: mustLogin
     },
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
+      beforeEnter: mustLogin
     },
     {
       path: '/log',
       name: 'Log',
-      component: Log
+      component: Log,
+      beforeEnter: mustLogin
     },
     {
       path: '/history',
       name: 'History',
-      component: History
+      component: History,
+      beforeEnter: mustLogin
     },
     {
       path: '/order',
       name: 'Order',
       component: Order,
+      beforeEnter: mustLogin,
       children: [
         {
           path: 'round',
@@ -75,3 +103,5 @@ export default new Router({
     { path: '*', redirect: '/login' }
   ]
 })
+
+export default router

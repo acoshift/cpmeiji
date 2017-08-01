@@ -22,7 +22,7 @@
 
                 <div class="cp-input-field _flex-column">
                   <label>Password:</label>
-                  <input v-model="password" class="cp-input" name="Password" placeholder="Password">
+                  <input v-model="password" class="cp-input" name="Password" placeholder="Password" type="password">
                 </div>
 
                 <div class="_flex-row _main-center">
@@ -43,8 +43,6 @@
 </template>
 
 <script>
-// import { API } from '@/services'
-
 export default {
   name: 'Login',
   data () {
@@ -55,7 +53,15 @@ export default {
   },
   methods: {
     login () {
-      this.$router.push('/menu')
+      this.$api.login(this.username, this.password)
+        .subscribe(
+          () => {
+            this.$router.push('/menu')
+          },
+          (err) => {
+            window.alert(err)
+          }
+        )
     }
   }
 }
