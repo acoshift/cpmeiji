@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import { Observable } from 'rxjs'
+import _ from 'lodash/fp'
 
 const http = axios.create({
   baseURL: process.env.API_URL
@@ -59,9 +60,36 @@ export const logout = () => {
   return Observable.of({})
 }
 
+const mapShop = (x) => ({
+  id: x.ShopId,
+  name: x.ShopName,
+  phone: x.ShopPhone,
+  code: x.ShopCode,
+  address: x.ShopAddress,
+  isActive: x.IsActive,
+  description: x.Description,
+  createdAt: x.CreateDate,
+  createdBy: x.CreateBy,
+  updatedBy: x.UpdateBy,
+  updatedAt: x.UpdateDate,
+  parentPrice: x.UseParentPrice,
+  parentTemplate: x.UseParentTemplate,
+  order: {
+    dateId: x.OrderDateId,
+    dateName: x.OrderDateName,
+    time: x.OrderTime
+  },
+  send: {
+    dateId: x.SendDateId,
+    dateName: x.SendDateName
+  }
+})
+
 export const listProducts = () => get('Product/GetProducts')
 
 export const listShops = () => get('Product/GetShops')
+  .map((res) => res.Shop)
+  .map(_.map(mapShop))
 
 export const getShop = (shopId) => get('Product/GetShopDetail', { params: { ShopId: shopId } })
 

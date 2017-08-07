@@ -4,9 +4,9 @@
     <div class="location-panel cp-block">
       <div class="cp-input-field _flex-column _no-margin cp-segment">
         <label>ร้านของคุณ</label>
-        <select class="cp-input _flex-span" v-model="selectedStore">
+        <select class="cp-input _flex-span" v-model="selectedShop">
           <option value="" disabled>กรุณาเลือก...</option>
-          <option v-for="store in accountData.stores" :key="store.id" :value="store">{{ store.name }}</option>
+          <option v-for="x in shops" :key="x.id" :value="x.id">{{ x.name }}</option>
         </select>
       </div>
 
@@ -49,7 +49,12 @@ export default {
   data () {
     return {
       roundData: require('./dataRound.json'),
-      selectedStore: this.accountData.stores[0]
+      selectedShop: ''
+    }
+  },
+  subscriptions () {
+    return {
+      shops: this.$api.listShops().do(console.log)
     }
   },
   methods: {
@@ -65,7 +70,7 @@ export default {
       }, (inputValue) => {
         if (inputValue && inputValue !== '') {
           this.$emit('selectRound', {
-            store: this.selectedStore,
+            store: this.selectedShop,
             round: round,
             po: inputValue
           })
