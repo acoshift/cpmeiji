@@ -29,12 +29,12 @@ const mustLogin = (to, from, next) => {
 }
 
 const mustNotLogin = (to, form, next) => {
-  API.isLogin().first().subscribe((b) => {
+  API.isLogin().do(console.log).first().subscribe((b) => {
     if (!b) {
       next()
       return
     }
-    next('/login')
+    next('/menu')
   })
 }
 
