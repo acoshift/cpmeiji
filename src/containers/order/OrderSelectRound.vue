@@ -54,7 +54,12 @@ export default {
   },
   subscriptions () {
     return {
-      shops: this.$api.listShops().do(console.log)
+      shops: this.$api.listShops().do(console.log),
+      detail: this.$watchAsObservable('selectedShop')
+        .pluck('newValue')
+        .filter(Boolean)
+        .flatMap((shopId) => this.$api.getShop(shopId))
+        .do(console.log)
     }
   },
   methods: {
