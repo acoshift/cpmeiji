@@ -7,7 +7,6 @@ const http = axios.create({
 })
 
 let token = window.localStorage.getItem('token') || ''
-console.log(token)
 const response = (res) => res.data.Data
 
 export const get = (path, config) => Observable
@@ -61,3 +60,9 @@ export const logout = () => {
 }
 
 export const listProducts = () => get('Product/GetProducts')
+
+export const listShops = () => get('Product/GetShops')
+
+export const getShop = (shopId) => get('Product/GetShopDetail', { params: { ShopId: shopId } })
+
+export const listProductsFromBlock = (blockId) => get('Product/GetBlock', { params: { BlockId: blockId } })
