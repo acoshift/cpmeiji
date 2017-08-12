@@ -9,7 +9,7 @@ import Log from '@/containers/log/Log'
 import History from '@/containers/history/History'
 
 import Order from '@/containers/order/Order'
-import OrderSelectRound from '@/containers/order/OrderSelectRound'
+import OrderSelectPeriod from '@/containers/order/OrderSelectPeriod'
 import OrderSelectCategory from '@/containers/order/OrderSelectCategory'
 import OrderSelectProduct from '@/containers/order/OrderSelectProduct'
 import OrderSummary from '@/containers/order/OrderSummary'
@@ -78,8 +78,8 @@ const router = new Router({
       beforeEnter: mustLogin,
       children: [
         {
-          path: 'round',
-          component: OrderSelectRound
+          path: 'period',
+          component: OrderSelectPeriod
         },
         {
           path: 'category',

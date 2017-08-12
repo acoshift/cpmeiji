@@ -35,7 +35,7 @@
             <div class="_flex-column">
 
               <div class="_flex-row _main-center">
-                <router-link to="/order/round" class="_full-width">
+                <router-link to="/order/period" class="_full-width">
                   <div class="cp-button -primary _font-bold cp-block">
                     ออเดอร์สินค้า
                   </div>

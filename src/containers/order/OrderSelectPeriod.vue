@@ -33,7 +33,7 @@ import SweetAlert from 'sweetalert'
 import TimeCard from './TimeCard'
 
 export default {
-  name: 'OrderSelectRound',
+  name: 'OrderSelectPeriod',
   components: {
     TimeCard
   },
@@ -49,7 +49,6 @@ export default {
   },
   data () {
     return {
-      roundData: require('./dataRound.json'),
       selectedShop: ''
     }
   },

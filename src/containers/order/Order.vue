@@ -52,7 +52,7 @@ export default {
   computed: {
     pageName () {
       let path = this.pagePath
-      if (path.indexOf('round') !== -1) return 'กรุณาเลือกข้อมูลการส่ง'
+      if (path.indexOf('period') !== -1) return 'กรุณาเลือกข้อมูลการส่ง'
       else if (path.indexOf('category/') !== -1) return 'กรุณาเลือกสินค้า'
       else if (path.indexOf('category') !== -1) return 'กรุณาเลือกหมวดสินค้า'
       else if (path.indexOf('summary') !== 'summary') return 'สรุปรายการสั่งซื้อ'
