@@ -2,8 +2,8 @@
   <div>
     <div class="product-panel cp-block">
       <div class="cp-input-field _flex-column _no-margin" style="padding: 12px 16px">
-        <div>ร้าน: <strong>{{ sessionData.store ? sessionData.store.name : '-' }}</strong></div>
-        <div>รอบส่ง: <strong>{{ sessionData.round ? sessionData.round.sentDate : '-' }}</strong></div>
+        <div>ร้าน: <strong v-if="shop">{{ shop.name }}</strong></div>
+        <div>รอบส่ง: <strong v-if="period">{{ period.send.dateName || '-' }}</strong></div>
         <div>PO: <strong>{{ sessionData.po ? sessionData.po : '-' }}</strong></div>
       </div>
 
@@ -45,6 +45,8 @@
 
 <script>
 import CategoryCard from './CategoryCard'
+import _ from 'lodash/fp'
+
 export default {
   name: 'OrderSelectCategory',
   components: {
@@ -63,6 +65,26 @@ export default {
   data () {
     return {
       allProductBlockData: require('./dataProduct.json')
+    }
+  },
+  created () {
+    if (!this.sessionData) {
+      this.$router.push('/order/period')
+    }
+  },
+  subscriptions () {
+    const shop$ = this.$watchAsObservable('sessionData', { immediate: true })
+      .pluck('newValue')
+      .filter(Boolean)
+      .flatMap((data) => this.$api.getShop(data.shop))
+      .share()
+    return {
+      shop: shop$
+        .map((x) => x.shop),
+      period: shop$
+        .map((x) => x.periods)
+        .map(_.find({ id: this.sessionData.period }))
+        .do(console.log)
     }
   },
   methods: {

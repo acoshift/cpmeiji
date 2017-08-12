@@ -34,14 +34,20 @@ export default {
       accountData: require('./dataAccount.json')
     }
   },
+  created () {
+    try {
+      this.sessionData = JSON.parse(window.localStorage.getItem('sessionData')) || {}
+    } catch (err) {}
+  },
   methods: {
     back () {
       this.$router.go(-1)
     },
     selectPeriod (data) {
-      this.sessionData.store = data.store
+      this.sessionData.shop = data.shop
       this.sessionData.period = data.period
       this.sessionData.po = data.po
+      window.localStorage.setItem('sessionData', JSON.stringify(this.sessionData))
       this.$router.push('/order/category')
     },
     checkout () {

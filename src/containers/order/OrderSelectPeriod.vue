@@ -75,7 +75,7 @@ export default {
       }, (inputValue) => {
         if (inputValue) {
           this.$emit('selectPeriod', {
-            store: this.selectedShop,
+            shop: this.selectedShop,
             period: period.id,
             po: inputValue
           })
