@@ -12,14 +12,15 @@
 
     </div>
     <div
+      v-if="detail"
       class="time-card-container row"
       style="padding-top: 110px">
-      <div v-for="(round, i) in roundData" :key="i" class="col-xs-12 cp-block">
+      <div v-for="x in detail.periods" :key="x.id" class="col-xs-12 cp-block">
         <TimeCard
-          :orderDate="round.orderDate"
-          :orderTime="round.orderTime"
-          :sentDate="round.sentDate"
-          @select="select(round)">
+          :orderDate="x.order.dateName"
+          :orderTime="x.order.time"
+          :sentDate="x.send.dateName"
+          @select="select(x)">
         </TimeCard>
       </div>
     </div>
@@ -63,7 +64,7 @@ export default {
     }
   },
   methods: {
-    select (round) {
+    select (period) {
       SweetAlert({
         title: 'กรุณาใส่เลข PO',
         type: 'input',
@@ -73,13 +74,12 @@ export default {
         cancelButtonText: 'ยกเลิก',
         confirmButtonText: 'ยืนยัน'
       }, (inputValue) => {
-        if (inputValue && inputValue !== '') {
-          this.$emit('selectRound', {
+        if (inputValue) {
+          this.$emit('selectPeriod', {
             store: this.selectedShop,
-            round: round,
+            period: period.id,
             po: inputValue
           })
-          this.$router.push('/order/category')
         }
       })
     }

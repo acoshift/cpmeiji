@@ -10,6 +10,8 @@ Vue.config.productionTip = false
 
 Vue.use(VueRx, Rx)
 
+API.setRouter(router)
+
 Vue.mixin({
   computed: {
     $api () {

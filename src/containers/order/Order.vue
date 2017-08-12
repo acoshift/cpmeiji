@@ -20,7 +20,7 @@
       class="content-container"
       :account-data="accountData"
       :session-data="sessionData"
-      @selectRound="selectRound">
+      @selectPeriod="selectPeriod">
     </router-view>
   </div>
 </template>
@@ -38,10 +38,11 @@ export default {
     back () {
       this.$router.go(-1)
     },
-    selectRound (data) {
+    selectPeriod (data) {
       this.sessionData.store = data.store
-      this.sessionData.round = data.round
+      this.sessionData.period = data.period
       this.sessionData.po = data.po
+      this.$router.push('/order/category')
     },
     checkout () {
       this.$router.push('/order/summary')

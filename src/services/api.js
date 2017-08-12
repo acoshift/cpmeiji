@@ -10,9 +10,26 @@ const http = axios.create({
 let token = window.localStorage.getItem('token') || ''
 const response = (res) => res.data.Data
 
+let router
+
+export const setRouter = (r) => {
+  router = r
+}
+
+const catchUnauthorize = (err) => {
+  console.dir(err)
+  if (err.response.status === 401) {
+    token = ''
+    window.localStorage.removeItem('token')
+    router.push('/')
+  }
+  return Observable.throw(err)
+}
+
 export const get = (path, config) => Observable
   .fromPromise(http.get(path, { ...config, headers: { Authorization: 'Bearer ' + token } }))
   .map(response)
+  .catch(catchUnauthorize)
 
 export const rawPost = (path, data, config) => Observable
   .fromPromise(http.post(path, data, config))
@@ -29,6 +46,7 @@ export const post = (path, data, config) =>
       }
     }
   )
+  .catch(catchUnauthorize)
 
 export const login = (username, password) =>
   rawPost(
@@ -85,6 +103,32 @@ const mapShop = (x) => ({
   }
 })
 
+const mapShopDetail = (x) => ({
+  items: x.Items,
+  periods: _.map(mapPeriod)(x.Period),
+  shop: mapShop(x.Shop)
+})
+
+const mapPeriod = (x) => ({
+  id: x.ShopPeriodId,
+  shopId: x.ShopId,
+  createdBy: x.CreateBy,
+  createdAt: x.CreateDate,
+  isActive: x.IsActive,
+  isDelete: x.IsDelete,
+  updatedBy: x.ModifyBy,
+  updatedAt: x.ModifyDate,
+  order: {
+    dateId: x.OrderDateId,
+    dateName: x.OrderDateName,
+    time: x.OrderTime
+  },
+  send: {
+    dateId: x.SendDateId,
+    dateName: x.SendDateName
+  }
+})
+
 export const listProducts = () => get('Product/GetProducts')
 
 export const listShops = () => get('Product/GetShops')
@@ -92,5 +136,6 @@ export const listShops = () => get('Product/GetShops')
   .map(_.map(mapShop))
 
 export const getShop = (shopId) => get('Product/GetShopDetail', { params: { ShopId: shopId } })
+  .map(mapShopDetail)
 
 export const listProductsFromBlock = (blockId) => get('Product/GetBlock', { params: { BlockId: blockId } })
