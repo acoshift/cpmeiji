@@ -14,7 +14,13 @@
       <div class="cp-block"><strong>รอบการสั่ง(วัน): </strong> {{ orderDate || '-' }}</div>
       <div class="cp-block"><strong>รอบการสั่ง(เวลา): </strong> {{ orderTime || '-' }}</div>
       <div class="cp-block"><strong>รอบการส่ง: </strong>
-        <DatePicker :date="startTime" :option="datePickerOption" :limit="limit"></DatePicker>
+        <DatePicker
+          :date="startTime"
+          :option="datePickerOption"
+          :limit="limit"
+          v-model="pickedSentDate"
+        ></DatePicker>
+        {{ pickedSentDate }}
       </div>
     </div>
     <div class="cp-button -positive" @click="select">เลือกรอบนี้</div>
@@ -37,6 +43,7 @@ export default {
   ],
   data () {
     return {
+      pickedSentDate: this.startTime,
       startTime: {
         time: moment().format('DD/MM/YYYY')
       },
@@ -67,6 +74,10 @@ export default {
         dismissible: true // as true as default
       },
       limit: [
+        {
+          type: 'weekday',
+          available: [1]
+        },
         {
           type: 'fromto',
           from: moment(),
