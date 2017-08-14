@@ -13,15 +13,23 @@
     <div class="cp-block">
       <div class="cp-block"><strong>รอบการสั่ง(วัน): </strong> {{ orderDate || '-' }}</div>
       <div class="cp-block"><strong>รอบการสั่ง(เวลา): </strong> {{ orderTime || '-' }}</div>
-      <div class="cp-block"><strong>รอบการส่ง: </strong> {{ sentDate || '-' }}</div>
+      <div class="cp-block"><strong>รอบการส่ง: </strong>
+        <DatePicker :date="startTime" :option="datePickerOption" :limit="limit"></DatePicker>
+      </div>
     </div>
     <div class="cp-button -positive" @click="select">เลือกรอบนี้</div>
   </div>
 </template>
 
 <script>
+import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue'
+import moment from 'moment'
+moment
 export default {
   name: 'TimeCard',
+  components: {
+    DatePicker
+  },
   props: [
     'orderDate',
     'orderTime',
@@ -29,6 +37,42 @@ export default {
   ],
   data () {
     return {
+      startTime: {
+        time: moment().format('DD/MM/YYYY')
+      },
+      datePickerOption: {
+        type: 'day',
+        week: ['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อ'],
+        month: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+        format: 'DD/MM/YYYY',
+        placeholder: 'เลือกวันส่ง',
+        inputStyle: {
+          'display': 'inline-block',
+          'padding': '6px',
+          'line-height': '22px',
+          'font-size': '16px',
+          'border': '1px solid rgb(209, 209, 209)',
+          'border-radius': '4px',
+          'color': '#5F5F5F'
+        },
+        color: {
+          header: '#fa3768',
+          headerText: 'white'
+        },
+        buttons: {
+          ok: 'ตกลง',
+          cancel: 'ยกเลิก'
+        },
+        overlayOpacity: 0.5, // 0.5 as default
+        dismissible: true // as true as default
+      },
+      limit: [
+        {
+          type: 'fromto',
+          from: moment(),
+          to: moment().add(60, 'day')
+        }
+      ]
     }
   },
   methods: {
