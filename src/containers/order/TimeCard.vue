@@ -18,9 +18,8 @@
           :date="startTime"
           :option="datePickerOption"
           :limit="limit"
-          v-model="pickedSentDate"
+          @change="dateChange"
         ></DatePicker>
-        {{ pickedSentDate }}
       </div>
     </div>
     <div class="cp-button -positive" @click="select">เลือกรอบนี้</div>
@@ -43,7 +42,7 @@ export default {
   ],
   data () {
     return {
-      pickedSentDate: this.startTime,
+      selectedDate: moment().format('DD/MM/YYYY'),
       startTime: {
         time: moment().format('DD/MM/YYYY')
       },
@@ -89,6 +88,10 @@ export default {
   methods: {
     select () {
       this.$emit('select')
+    },
+    dateChange (date) {
+      console.log(date)
+      this.selectedDate = date
     }
   }
 }
