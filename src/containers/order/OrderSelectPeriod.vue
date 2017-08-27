@@ -15,13 +15,27 @@
       v-if="detail"
       class="time-card-container row"
       style="padding-top: 110px">
-      <div v-for="x in detail.periods" :key="x.id" class="col-xs-12 cp-block">
+      <div v-for="x in periodList" :key="x.id" class="col-xs-12 cp-block">
         <TimeCard
           :orderDate="x.order.dateName"
           :orderTime="x.order.time"
           :sentDate="x.send.dateName"
           @select="select(x)">
         </TimeCard>
+      </div>
+      <div class="col-xs-12 cp-block">
+        <div class="time-card cp-segment">
+          <DatePicker
+            ref="datePicker"
+            :date="startTime"
+            :option="datePickerOption"
+            :limit="limit"
+            @change="dateChange"
+          ></DatePicker>
+          <div class="cp-button -positive" @click="$refs.datePicker.showCheck()">เลือกรอบอื่น</div>
+          <!-- <div class="hidden"> -->
+          <!-- </div> -->
+        </div>
       </div>
     </div>
 
@@ -31,17 +45,16 @@
 <script>
 import SweetAlert from 'sweetalert'
 import TimeCard from './TimeCard'
+import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue'
+import moment from 'moment'
 
 export default {
   name: 'OrderSelectPeriod',
   components: {
-    TimeCard
+    TimeCard,
+    DatePicker
   },
   props: {
-    accountData: {
-      type: Object,
-      required: true
-    },
     sessionData: {
       type: Object,
       required: true
@@ -49,7 +62,42 @@ export default {
   },
   data () {
     return {
-      selectedShop: ''
+      selectedShop: '',
+      startTime: {
+        time: moment().format('DD/MM/YYYY')
+      },
+      datePickerOption: {
+        type: 'day',
+        week: ['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อ'],
+        month: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+        format: 'DD/MM/YYYY',
+        placeholder: 'เลือกวันส่ง',
+        inputStyle: {
+          display: 'none'
+        },
+        color: {
+          header: '#fa3768',
+          headerText: 'white'
+        },
+        buttons: {
+          ok: 'ตกลง',
+          cancel: 'ยกเลิก'
+        },
+        overlayOpacity: 0.5, // 0.5 as default
+        dismissible: true // as true as default
+      },
+      limit: [
+        {
+          type: 'weekday',
+          available: [0, 1, 2, 3, 4, 5, 6]
+        },
+        {
+          type: 'fromto',
+          from: moment(),
+          to: moment().add(120, 'day')
+        }
+      ],
+      periodList: []
     }
   },
   subscriptions () {
@@ -59,7 +107,10 @@ export default {
         .pluck('newValue')
         .filter(Boolean)
         .flatMap((shopId) => this.$api.getShop(shopId))
-        .do(console.log)
+        .do((detail) => {
+          this.periodList = detail.periods
+          console.log(this.periodList)
+        })
     }
   },
   methods: {
@@ -81,12 +132,35 @@ export default {
           })
         }
       })
+    },
+    dateChange (date) {
+      console.log(date)
+      console.log(this.periodList)
+      this.periodList.push({
+        order: {
+          dateName: date,
+          time: '-'
+        },
+        send: {
+          dateName: '-'
+        }
+      })
+      // this.selectedDate = date
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.hidden {
+  display: none;
+}
+.time-card {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 3px 7px rgba(50,50,93,.03), 0 2px 7px rgba(0,0,0,.03);
+  border: 1px solid #efefef;
+}
 .time-card-container {
   padding-top: 90px;
 }

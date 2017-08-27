@@ -20,7 +20,8 @@
       class="content-container"
       :account-data="accountData"
       :session-data="sessionData"
-      @selectPeriod="selectPeriod">
+      @selectPeriod="selectPeriod"
+      @selectBlock="selectBlock">
     </router-view>
   </div>
 </template>
@@ -53,6 +54,11 @@ export default {
     checkout () {
       this.$router.push('/order/summary')
       console.log('checkout')
+    },
+    selectBlock (id) {
+      this.sessionData.blockId = id
+      window.localStorage.setItem('sessionData', JSON.stringify(this.sessionData))
+      this.$router.push('/order/category/' + id)
     }
   },
   computed: {

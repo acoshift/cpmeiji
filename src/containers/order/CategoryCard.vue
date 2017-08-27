@@ -2,7 +2,7 @@
   <div class="category-card cp-segment">
     <div class="">
       <div class="cp-block"><h3 class="_color-accent">{{ categoryTitle || '-' }}</h3></div>
-      <div class=""><strong>จำนวนสินค้า: </strong> {{ categoryItemNum || '-' }}</div>
+      <!-- <div class=""><strong>จำนวนสินค้า: </strong> {{ categoryItemNum || '-' }}</div> -->
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'CategoryCard',
-  props: ['categoryTitle', 'categoryItemNum'],
+  props: ['categoryTitle'],
   data () {
     return {
     }

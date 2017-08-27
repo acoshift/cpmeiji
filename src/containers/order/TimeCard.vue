@@ -13,13 +13,13 @@
     <div class="cp-block">
       <div class="cp-block"><strong>รอบการสั่ง(วัน): </strong> {{ orderDate || '-' }}</div>
       <div class="cp-block"><strong>รอบการสั่ง(เวลา): </strong> {{ orderTime || '-' }}</div>
-      <div class="cp-block"><strong>รอบการส่ง: </strong>
-        <DatePicker
+      <div class="cp-block"><strong>รอบการส่ง: </strong> {{ sentDate || '-' }}
+        <!-- <DatePicker
           :date="startTime"
           :option="datePickerOption"
           :limit="limit"
           @change="dateChange"
-        ></DatePicker>
+        ></DatePicker> -->
       </div>
     </div>
     <div class="cp-button -positive" @click="select">เลือกรอบนี้</div>
@@ -29,7 +29,7 @@
 <script>
 import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue'
 import moment from 'moment'
-moment
+
 export default {
   name: 'TimeCard',
   components: {

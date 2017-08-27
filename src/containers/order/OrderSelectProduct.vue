@@ -2,16 +2,16 @@
   <div>
     <div class="product-panel cp-block cp-segment">
       <div class="_flex-row _main-end">
-        <!--<div class="_flex-row cp-side-space-bigger">
-          <input id="tax" v-model="selectedType" value="all" name="type" class="cp-input" type="radio">
-          <label for="tax" class="cp-label-inline">ทั้งหมด</label>
-        </div>-->
         <div class="_flex-row cp-side-space-bigger">
-          <input id="tax"  v-model="selectedType" value="tax" name="type" class="cp-input" type="radio">
+          <input id="alltax" v-model="selectedType" value="all" name="type" class="cp-input" type="radio">
+          <label for="alltax" class="cp-label-inline">ทั้งหมด</label>
+        </div>
+        <div class="_flex-row cp-side-space-bigger">
+          <input id="tax"  v-model="selectedType" value="vat" name="type" class="cp-input" type="radio">
           <label for="tax" class="cp-label-inline">มี Vat</label>
         </div>
         <div class="_flex-row cp-side-space-bigger">
-          <input id="notax"  v-model="selectedType" value="untax" name="type" class="cp-input" type="radio">
+          <input id="notax"  v-model="selectedType" value="novat" name="type" class="cp-input" type="radio">
           <label for="notax" class="cp-label-inline">ไม่มี Vat</label>
         </div>
       </div>
@@ -20,11 +20,11 @@
       <!--<div class="col-xs-12 cp-block">
         <div class="cp-button -primary">กลับไปเลือกหมวดหมู่</div>
       </div>-->
-      <div v-for="(product, i) in productList" :key="i" class="col-xs-12 cp-block">
+      <div v-for="x in productList" :key="x.id" class="col-xs-12 cp-block">
         <ProductCard
-          :code="product.code"
-          :name="product.title"
-          :vat="product.vat"
+          :code="x.productCode"
+          :name="x.productName"
+          :vat="x.isVat"
           :quantity="0">
         </ProductCard>
       </div>
@@ -56,14 +56,21 @@ export default {
   },
   subscriptions () {
     return {
-      products: this.$api.listProducts().do(console.log)
+      products: this.$api.listProductsFromBlock(this.sessionData.blockId)
     }
   },
   computed: {
     productList () {
-      let categoryId = this.$route.params.categoryId
-      let productList = this.accountData.blocks.filter(x => x.id === categoryId)
-      return productList.length ? productList[0].products : []
+      if (!this.products) return []
+      return this.products.filter((x) => {
+        if (this.selectedType === 'vat') {
+          return !!x.isVat
+        }
+        if (this.selectedType === 'novat') {
+          return !x.isVat
+        }
+        return true
+      })
     }
   },
   methods: {

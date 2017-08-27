@@ -21,16 +21,14 @@
     </div>
 
     <div class="product-card-container row">
-      <div v-for="category in accountData.blocks" :key="category.id" class="col-xs-12 cp-block">
-        <router-link :to="`category/${category.id}`">
-          <CategoryCard
-            :categoryId="category.id"
-            :categoryTitle="category.title"
-            :categoryItemNum="category.products.length">
-          </CategoryCard>
-        </router-link>
+      <div v-for="x in items" :key="x.block.id" class="col-xs-12 cp-block">
+        <CategoryCard
+          @click.native="selectBlock(x.block.id)"
+          :categoryId="x.block.id"
+          :categoryTitle="x.block.name">
+        </CategoryCard>
       </div>
-      <div class="col-xs-12 cp-block">
+      <!-- <div class="col-xs-12 cp-block">
         <router-link :to="`category/all`">
           <CategoryCard
             categoryId="all"
@@ -38,7 +36,7 @@
             :categoryItemNum="allProductBlockData.length">
           </CategoryCard>
         </router-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -53,10 +51,6 @@ export default {
     CategoryCard
   },
   props: {
-    accountData: {
-      type: Object,
-      required: true
-    },
     sessionData: {
       type: Object,
       required: true
@@ -83,13 +77,19 @@ export default {
         .map((x) => x.shop),
       period: shop$
         .map((x) => x.periods)
-        .map(_.find({ id: this.sessionData.period }))
+        .map(_.find({ id: this.sessionData.period })),
+        // .do(console.log)
+      items: shop$
+        .map((x) => x.items)
         .do(console.log)
     }
   },
   methods: {
     select (id, variant, quantity) {
       console.log('select this', id)
+    },
+    selectBlock (id) {
+      this.$emit('selectBlock', id)
     }
   }
 }

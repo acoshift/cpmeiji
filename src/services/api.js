@@ -78,6 +78,44 @@ export const logout = () => {
   return Observable.of({})
 }
 
+const mapItem = (x) => ({
+  block: {
+    id: x.BlockId,
+    name: x.BlockName
+  },
+  price: x.Price,
+  product: {
+    id: x.ProductId,
+    code: x.ProductCode,
+    name: x.ProductName
+  },
+  shop: {
+    id: x.ShopId
+  },
+  unit: x.Unit
+})
+
+const mapProduct = (x) => ({
+  brand: x.Brand,
+  createBy: x.CreateBy,
+  createDate: x.CreateDate,
+  description: x.Description,
+  isActive: x.IsActive,
+  isDelete: x.IsDelete,
+  isPromotion: x.IsPromotion,
+  isVat: x.IsVat,
+  price: x.Price,
+  productCode: x.ProductCode,
+  productId: x.ProductId,
+  productName: x.ProductName,
+  saleEndDate: x.SaleEndDate,
+  saleStartDate: x.SaleStartDate,
+  size: x.Size,
+  unit: x.Unit,
+  updateBy: x.UpdateBy,
+  updateDate: x.UpdateDate
+})
+
 const mapShop = (x) => ({
   id: x.ShopId,
   name: x.ShopName,
@@ -104,7 +142,7 @@ const mapShop = (x) => ({
 })
 
 const mapShopDetail = (x) => ({
-  items: x.Items,
+  items: _.map(mapItem)(x.Items),
   periods: _.map(mapPeriod)(x.Period),
   shop: mapShop(x.Shop)
 })
@@ -138,4 +176,5 @@ export const listShops = () => get('Product/GetShops')
 export const getShop = (shopId) => get('Product/GetShopDetail', { params: { ShopId: shopId } })
   .map(mapShopDetail)
 
-export const listProductsFromBlock = (blockId) => get('Product/GetBlock', { params: { BlockId: blockId } })
+export const listProductsFromBlock = (blockId) => get('Product/GetProducts', { params: { BlockId: blockId } })
+  .map(_.map(mapProduct))
