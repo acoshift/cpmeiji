@@ -11,16 +11,28 @@
       </div>
     </div>
 
-    <div v-for="(category, i) in mockData" :key="i" class="cp-segment cp-block">
+    <!-- <div v-for="(category, i) in mockData" :key="i" class="cp-segment cp-block">
       <h3>{{ category.name }}</h3>
       <div class="item-container">
         <div class="item cp-block-big">
           <div><strong>สินค้า</strong></div>
           <div><strong>จำนวน</strong></div>
         </div>
-        <div v-for="(item, i) in category.products" :key="i" class="item cp-block">
-          <div>{{ item.title }}</div>
-          <div>{{ item.quantity }}</div>
+        <div v-for="x in productList" :key="x.productId" class="item cp-block">
+          <div>{{ x.name }}</div>
+          <div>{{ x.name }}</div>
+        </div>
+      </div>
+    </div> -->
+    <div class="cp-segment cp-block">
+      <div class="item-container">
+        <div class="item cp-block-big">
+          <div><strong>สินค้า</strong></div>
+          <div><strong>จำนวน</strong></div>
+        </div>
+        <div v-for="x in productList" :key="x.productId" class="item cp-block">
+          <div>{{ x.productName }}</div>
+          <div>{{ x.quantity }}</div>
         </div>
       </div>
     </div>
@@ -34,12 +46,30 @@
 
 <script>
 import SweetAlert from 'sweetalert'
+import map from 'lodash/map'
+import find from 'lodash/find'
+
 export default {
   name: 'OrderSummary',
   props: {
     sessionData: {
       type: Object,
       required: true
+    }
+  },
+  subscriptions () {
+    return {
+      products: this.$api.listProductsFromBlock(this.sessionData.blockId)
+    }
+  },
+  computed: {
+    productList () {
+      if (!this.products) return []
+      return map(this.sessionData.product, (v, k) => {
+        console.log(this.products)
+        console.log(find(this.products, { productId: +k }))
+        return { ...find(this.products, { productId: +k }), quantity: v }
+      })
     }
   },
   data () {

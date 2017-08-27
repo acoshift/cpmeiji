@@ -6,9 +6,9 @@
       <div class="cp-block"><strong>Vat: </strong> {{ vat ? 'มี' : 'ไม่มี' }}</div>
     </div>
     <div class="_flex-row">
-      <div class="decrease" @click="removeOne" :class="{disabled: thisQuantity <= 0}">-1</div>
-      <div class="decrease" @click="removeTen" :class="{disabled: thisQuantity < 10}">-10</div>
-      <input class="q-input cp-input _align-center" type="number" min="0" v-model="thisQuantity">
+      <div class="decrease" @click="removeOne" :class="{disabled: quantity <= 0}">-1</div>
+      <div class="decrease" @click="removeTen" :class="{disabled: quantity < 10}">-10</div>
+      <input class="q-input cp-input _align-center" type="number" min="0" v-model="customQuantity">
       <div class="increase" @click="addOne">+1</div>
       <div class="increase" @click="addTen">+10</div>
     </div>
@@ -21,7 +21,12 @@ export default {
   props: ['code', 'name', 'vat', 'quantity'],
   data () {
     return {
-      thisQuantity: this.quantity || 0
+      customQuantity: this.quantity
+    }
+  },
+  watch: {
+    quantity () {
+      this.customQuantity = this.quantity
     }
   },
   methods: {
@@ -29,20 +34,16 @@ export default {
       this.$emit('select')
     },
     addOne () {
-      this.thisQuantity += 1
-      // this.$emit('addOne')
+      this.$emit('add', 1)
     },
     addTen () {
-      this.thisQuantity += 10
-      // this.$emit('addTen')
+      this.$emit('add', 10)
     },
     removeOne () {
-      this.thisQuantity -= 1
-      // this.$emit('addOne')
+      this.$emit('add', -1)
     },
     removeTen () {
-      this.thisQuantity -= 10
-      // this.$emit('addTen')
+      this.$emit('add', -10)
     }
   }
 }

@@ -25,7 +25,8 @@
           :code="x.productCode"
           :name="x.productName"
           :vat="x.isVat"
-          :quantity="0">
+          :quantity="getProductQuantity(x.productId)"
+          @add="(v) => add(x.productId, v)">
         </ProductCard>
       </div>
     </div>
@@ -47,7 +48,8 @@ export default {
   },
   data () {
     return {
-      selectedType: 'all'
+      selectedType: 'all',
+      sessionProduct: {}
     }
   },
   subscriptions () {
@@ -69,12 +71,23 @@ export default {
       })
     }
   },
+  watch: {
+    sessionData: {
+      handler () {
+        if (!this.sessionData) this.sessionProduct = {}
+        if (!this.sessionData.product) this.sessionProduct = {}
+        this.sessionProduct = this.sessionData.product
+      },
+      immediate: true,
+      deep: true
+    }
+  },
   methods: {
-    addOne (product) {
-      console.log('ADD one', product)
+    add (id, v) {
+      this.$emit('addProduct', id, v)
     },
-    addTen (product) {
-      console.log('ADD ten', product)
+    getProductQuantity (id) {
+      return this.sessionProduct[id] || 0
     }
   }
 }

@@ -20,7 +20,8 @@
       class="content-container"
       :session-data="sessionData"
       @selectPeriod="selectPeriod"
-      @selectBlock="selectBlock">
+      @selectBlock="selectBlock"
+      @addProduct="addProduct">
     </router-view>
   </div>
 </template>
@@ -46,6 +47,8 @@ export default {
       this.sessionData.shop = data.shop
       this.sessionData.period = data.period
       this.sessionData.po = data.po
+      this.sessionData.product = {}
+      this.sessionData.blockId = null
       window.localStorage.setItem('sessionData', JSON.stringify(this.sessionData))
       this.$router.push('/order/category')
     },
@@ -55,8 +58,19 @@ export default {
     },
     selectBlock (id) {
       this.sessionData.blockId = id
+      this.sessionData.product = {}
       window.localStorage.setItem('sessionData', JSON.stringify(this.sessionData))
       this.$router.push('/order/category/' + id)
+    },
+    addProduct (id, v) {
+      if (!this.sessionData.product) {
+        this.sessionData.product = {}
+      }
+      if (!this.sessionData.product[id]) {
+        this.$set(this.sessionData.product, id, 0)
+      }
+      this.$set(this.sessionData.product, id, this.sessionData.product[id] + v)
+      window.localStorage.setItem('sessionData', JSON.stringify(this.sessionData))
     }
   },
   computed: {
