@@ -37,10 +37,6 @@ import SweetAlert from 'sweetalert'
 export default {
   name: 'OrderSummary',
   props: {
-    accountData: {
-      type: Object,
-      required: true
-    },
     sessionData: {
       type: Object,
       required: true

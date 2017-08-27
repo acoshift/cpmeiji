@@ -18,7 +18,6 @@
     </div>
     <router-view
       class="content-container"
-      :account-data="accountData"
       :session-data="sessionData"
       @selectPeriod="selectPeriod"
       @selectBlock="selectBlock">
@@ -31,8 +30,7 @@ export default {
   name: 'Order',
   data () {
     return {
-      sessionData: {},
-      accountData: require('./dataAccount.json')
+      sessionData: {}
     }
   },
   created () {

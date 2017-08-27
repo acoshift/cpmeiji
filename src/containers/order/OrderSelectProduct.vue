@@ -40,10 +40,6 @@ export default {
     ProductCard
   },
   props: {
-    accountData: {
-      type: Object,
-      required: true
-    },
     sessionData: {
       type: Object,
       required: true
