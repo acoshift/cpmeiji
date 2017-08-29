@@ -21,12 +21,16 @@
       :session-data="sessionData"
       @selectPeriod="selectPeriod"
       @selectBlock="selectBlock"
-      @addProduct="addProduct">
+      @addProduct="addProduct"
+      @doCheckout="doCheckout">
     </router-view>
   </div>
 </template>
 
 <script>
+import map from 'lodash/map'
+import SweetAlert from 'sweetalert'
+
 export default {
   name: 'Order',
   data () {
@@ -55,6 +59,24 @@ export default {
     checkout () {
       this.$router.push('/order/summary')
       console.log('checkout')
+    },
+    doCheckout () {
+      this.$api.checkout({
+        'Order': {
+          'ShopId': this.sessionData.shop,
+          'PONumber': this.sessionData.po
+        },
+        'OrderItems': map(this.product, (v, k) => ({
+          'OrderItemId': k,
+          'Quantity': v
+        }))
+      })
+        .subscribe(
+          () => {
+            SweetAlert('สำเร็จ!', 'ออเดอร์ได้ถูกส่งแล้ว', 'success')
+            this.$router.push('/')
+          }
+        )
     },
     selectBlock (id) {
       this.sessionData.blockId = id

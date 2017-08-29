@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import SweetAlert from 'sweetalert'
 import map from 'lodash/map'
 import find from 'lodash/find'
 
@@ -143,7 +142,7 @@ export default {
   },
   methods: {
     placeOrder () {
-      SweetAlert('สำเร็จ!', 'ออเดอร์ได้ถูกส่งแล้ว', 'success')
+      this.$emit('doCheckout')
     }
   }
 }

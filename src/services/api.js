@@ -41,8 +41,8 @@ export const post = (path, data, config) =>
     data,
     {
       ...config,
-      params: {
-        Token: token
+      headers: {
+        Authorization: 'Bearer ' + token
       }
     }
   )
@@ -178,3 +178,6 @@ export const getShop = (shopId) => get('Product/GetShopDetail', { params: { Shop
 
 export const listProductsFromBlock = (blockId) => get('Product/GetProducts', { params: { BlockId: blockId } })
   .map(_.map(mapProduct))
+
+export const checkout = (data) => post('Order/SaveOrder', data)
+
