@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="product-panel cp-block cp-segment">
+    <!-- <div class="product-panel cp-block cp-segment">
       <div class="_flex-row _main-end">
         <div class="_flex-row cp-side-space-bigger">
           <input id="alltax" v-model="selectedType" value="all" name="type" class="cp-input" type="radio">
@@ -15,7 +15,7 @@
           <label for="notax" class="cp-label-inline">ไม่มี Vat</label>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="product-card-container row">
       <!--<div class="col-xs-12 cp-block">
         <div class="cp-button -primary">กลับไปเลือกหมวดหมู่</div>
@@ -95,7 +95,8 @@ export default {
 
 <style scoped lang="scss">
 .product-card-container {
-  padding-top: 60px;
+  // padding-top: 60px;
+  padding-top: 10px;
 }
 .product-panel {
   box-sizing: border-box;
