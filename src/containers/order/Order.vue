@@ -61,12 +61,13 @@ export default {
       console.log('checkout')
     },
     doCheckout () {
+      console.log(this.sessionData)
       this.$api.checkout({
         'Order': {
           'ShopId': this.sessionData.shop,
           'PONumber': this.sessionData.po
         },
-        'OrderItems': map(this.product, (v, k) => ({
+        'OrderItems': map(this.sessionData.product, (v, k) => ({
           'OrderItemId': k,
           'Quantity': v
         }))
