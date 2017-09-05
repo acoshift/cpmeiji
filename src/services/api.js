@@ -167,7 +167,10 @@ const mapPeriod = (x) => ({
   }
 })
 
-export const listProducts = () => get('Product/GetProducts')
+export const listProducts = (shopId, blockId) => get('Product/GetShopDetail', { params: { ShopId: shopId } })
+  .map((res) => res.Items)
+  .do(console.log)
+  .map(_.filter((x) => +x.BlockId === +blockId))
 
 export const listShops = () => get('Product/GetShops')
   .map((res) => res.Shop)

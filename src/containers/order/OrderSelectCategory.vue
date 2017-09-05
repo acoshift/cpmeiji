@@ -2,8 +2,9 @@
   <div>
     <div class="product-panel cp-block">
       <div class="cp-input-field _flex-column _no-margin" style="padding: 12px 16px">
-        <div>ร้าน: <strong v-if="shop">{{ shop.name }}</strong></div>
-        <div>รอบส่ง: <strong v-if="period">{{ period.send.dateName || '-' }}</strong></div>
+        <div>ร้าน: <strong>{{ sessionData.shop.name }}</strong></div>
+        <div>วันส่ง: <strong>{{ sessionData.period.date || '-' }}</strong></div>
+        <div>รอบส่ง: <strong>{{ sessionData.period.sendDate || '-' }}</strong></div>
         <div>PO: <strong>{{ sessionData.po ? sessionData.po : '-' }}</strong></div>
       </div>
 
@@ -21,11 +22,11 @@
     </div>
 
     <div class="product-card-container row">
-      <div v-for="x in items" :key="x.block.id" class="col-xs-12 cp-block">
+      <div v-for="(x, k) in blocks" :key="k" class="col-xs-12 cp-block">
         <CategoryCard
-          @click.native="selectBlock(x.block.id)"
-          :categoryId="x.block.id"
-          :categoryTitle="x.block.name">
+          @click.native="selectBlock(k)"
+          :categoryId="k"
+          :categoryTitle="x[0].block.name">
         </CategoryCard>
       </div>
       <!-- <div class="col-xs-12 cp-block">
@@ -56,11 +57,6 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
-      allProductBlockData: require('./dataProduct.json')
-    }
-  },
   created () {
     if (!this.sessionData) {
       this.$router.push('/order/period')
@@ -70,17 +66,12 @@ export default {
     const shop$ = this.$watchAsObservable('sessionData', { immediate: true })
       .pluck('newValue')
       .filter(Boolean)
-      .flatMap((data) => this.$api.getShop(data.shop))
+      .flatMap((data) => this.$api.getShop(data.shop.id))
       .share()
     return {
-      shop: shop$
-        .map((x) => x.shop),
-      period: shop$
-        .map((x) => x.periods)
-        .map(_.find({ id: this.sessionData.period })),
-        // .do(console.log)
-      items: shop$
+      blocks: shop$
         .map((x) => x.items)
+        .map(_.groupBy((x) => x.block.id))
         .do(console.log)
     }
   },

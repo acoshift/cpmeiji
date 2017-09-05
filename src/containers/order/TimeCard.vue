@@ -11,6 +11,7 @@
       sunday: orderDate === 'วันอาทิตย์'
     }">
     <div class="cp-block">
+      <div class="cp-block"><strong>วันที่: </strong> {{ date || '-' }}</div>
       <div class="cp-block"><strong>รอบการสั่ง(วัน): </strong> {{ orderDate || '-' }}</div>
       <div class="cp-block"><strong>รอบการสั่ง(เวลา): </strong> {{ orderTime || '-' }}</div>
       <div class="cp-block"><strong>รอบการส่ง: </strong> {{ sentDate || '-' }}
@@ -38,7 +39,8 @@ export default {
   props: [
     'orderDate',
     'orderTime',
-    'sentDate'
+    'sentDate',
+    'date'
   ],
   data () {
     return {

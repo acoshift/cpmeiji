@@ -22,11 +22,11 @@
       </div>-->
       <div v-for="x in productList" :key="x.id" class="col-xs-12 cp-block">
         <ProductCard
-          :code="x.productCode"
-          :name="x.productName"
+          :code="x.ProductCode"
+          :name="x.ProductName"
           :vat="x.isVat"
-          :quantity="getProductQuantity(x.productId)"
-          @add="(v) => add(x.productId, v)">
+          :quantity="getProductQuantity(x.ShopPriceMPId)"
+          @add="(v) => add(x.ShopPriceMPId, v)">
         </ProductCard>
       </div>
     </div>
@@ -54,7 +54,7 @@ export default {
   },
   subscriptions () {
     return {
-      products: this.$api.listProductsFromBlock(this.sessionData.blockId)
+      products: this.$api.listProducts(this.sessionData.shop.id, this.sessionData.blockId)
     }
   },
   computed: {

@@ -3,7 +3,7 @@
     <div class="cp-block">
       <div class="cp-block"><strong>รหัสเมจิ: </strong> {{ code || '-' }}</div>
       <div class="cp-block"><strong>ชื้อสินค้า: </strong> {{ name || '-' }}</div>
-      <div class="cp-block"><strong>Vat: </strong> {{ vat ? 'มี' : 'ไม่มี' }}</div>
+      <!-- <div class="cp-block"><strong>Vat: </strong> {{ vat ? 'มี' : 'ไม่มี' }}</div> -->
     </div>
     <div class="_flex-row">
       <div class="decrease" @click="removeOne" :class="{disabled: quantity <= 0}">-1</div>

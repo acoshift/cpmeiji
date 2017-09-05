@@ -5,8 +5,9 @@
         สรุปการสั่งซื้อ
       </div>
       <div class="_flex-column">
-        <div class="cp-block">ร้าน: <strong>{{ sessionData.store ? sessionData.store.name : '-' }}</strong></div>
-        <div class="cp-block">รอบส่ง: <strong>{{ sessionData.round ? sessionData.round.sentDate : '-' }}</strong></div>
+        <div class="cp-block">ร้าน: <strong>{{ sessionData.shop.name }}</strong></div>
+        <div class="cp-block">วันส่ง: <strong>{{ sessionData.period.date }}</strong></div>
+        <div class="cp-block">รอบส่ง: <strong>{{ sessionData.period.sendDate }}</strong></div>
         <div class="cp-block">PO: <strong>{{ sessionData.po ? sessionData.po : '-' }}</strong></div>
       </div>
     </div>
@@ -30,8 +31,8 @@
           <div><strong>สินค้า</strong></div>
           <div><strong>จำนวน</strong></div>
         </div>
-        <div v-for="x in productList" :key="x.productId" class="item cp-block">
-          <div>{{ x.productName }}</div>
+        <div v-for="x in productList" :key="x.ShopPriceMPId" class="item cp-block">
+          <div>{{ x.ProductName }}</div>
           <div>{{ x.quantity }}</div>
         </div>
       </div>
@@ -58,7 +59,7 @@ export default {
   },
   subscriptions () {
     return {
-      products: this.$api.listProductsFromBlock(this.sessionData.blockId)
+      products: this.$api.listProducts(this.sessionData.shop.id, this.sessionData.blockId)
     }
   },
   computed: {
@@ -66,8 +67,8 @@ export default {
       if (!this.products) return []
       return map(this.sessionData.product, (v, k) => {
         console.log(this.products)
-        console.log(find(this.products, { productId: +k }))
-        return { ...find(this.products, { productId: +k }), quantity: v }
+        console.log(find(this.products, { ShopPriceMPId: +k }))
+        return { ...find(this.products, { ShopPriceMPId: +k }), quantity: v }
       })
     }
   },

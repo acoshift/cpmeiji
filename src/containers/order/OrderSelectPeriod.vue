@@ -15,11 +15,12 @@
       v-if="detail"
       class="time-card-container row"
       style="padding-top: 110px">
-      <div v-for="x in periodList" :key="x.id" class="col-xs-12 cp-block">
+      <div v-for="x in periodList" :key="x.date" class="col-xs-12 cp-block">
         <TimeCard
-          :orderDate="x.order.dateName"
-          :orderTime="x.order.time"
-          :sentDate="x.send.dateName"
+          :date="x.date"
+          :orderDate="x.orderDate"
+          :orderTime="x.orderTime"
+          :sentDate="x.sendDate"
           @select="select(x)">
         </TimeCard>
       </div>
@@ -47,6 +48,7 @@ import SweetAlert from 'sweetalert'
 import TimeCard from './TimeCard'
 import DatePicker from 'vue-datepicker/vue-datepicker-es6.vue'
 import moment from 'moment'
+import _ from 'lodash'
 
 export default {
   name: 'OrderSelectPeriod',
@@ -108,7 +110,22 @@ export default {
         .filter(Boolean)
         .flatMap((shopId) => this.$api.getShop(shopId))
         .do((detail) => {
-          this.periodList = detail.periods
+          this.periodList = []
+          let n = moment()
+          for (let i = 0; i < 14; ++i) {
+            let p = _.find(detail.periods, (x) => x.order.dateId === n.day())
+            console.log(p)
+            if (p) {
+              this.periodList.push({
+                date: n.format('DD/MM/YYYY'),
+                orderDate: p.order.dateId,
+                orderTime: p.order.time,
+                sendDateId: p.send.dateId,
+                sendDate: p.send.dateName
+              })
+            }
+            n = n.add(1, 'd')
+          }
           console.log(this.periodList)
         })
     }
@@ -126,8 +143,8 @@ export default {
       }, (inputValue) => {
         if (inputValue) {
           this.$emit('selectPeriod', {
-            shop: this.selectedShop,
-            period: period.id,
+            shop: _.find(this.shops, { id: this.selectedShop }),
+            period: period,
             po: inputValue
           })
         }

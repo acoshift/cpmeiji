@@ -64,11 +64,16 @@ export default {
       console.log(this.sessionData)
       this.$api.checkout({
         'Order': {
-          'ShopId': this.sessionData.shop,
-          'PONumber': this.sessionData.po
+          'OrderId': 0,
+          'ShopId': this.sessionData.shop.id,
+          'PONumber': this.sessionData.po,
+          'OrderDateId': this.sessionData.period.orderDate,
+          'OrderTime': this.sessionData.period.orderTime,
+          'SendDateId': this.sessionData.period.sendDateId,
+          'SendDate': this.sessionData.period.date
         },
         'OrderItems': map(this.sessionData.product, (v, k) => ({
-          'OrderItemId': k,
+          'ShopPriceMPId': k,
           'Quantity': v
         }))
       })
